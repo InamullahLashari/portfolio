@@ -1,0 +1,93 @@
+/* ---------------------------------------------------------------------
+   Skills — grouped by area instead of a flat list, each group a card
+   with a gradient icon badge and a row of skill chips. No proficiency
+   label (no "Core"/"Working") — everything shown here is actively used.
+------------------------------------------------------------------------ */
+
+.skills-groups {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.skill-group-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px 22px 20px;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.skills-groups.in-view .skill-group-card { opacity: 1; transform: translateY(0); }
+
+.skill-group-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.skill-group-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 14px 30px rgba(124, 92, 255, 0.14);
+}
+.skill-group-card:hover::before { transform: scaleX(1); }
+
+.skill-group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.skill-group-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  color: #fff;
+  background: var(--accent-gradient);
+}
+
+.skill-group-head h3 {
+  font-size: 1.02rem;
+  font-family: var(--font-display);
+}
+
+.skill-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-chip {
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.skill-chip:hover {
+  color: #fff;
+  border-color: transparent;
+  background: var(--accent-gradient);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 760px) {
+  .skills-groups { grid-template-columns: 1fr; }
+}

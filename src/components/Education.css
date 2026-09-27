@@ -1,0 +1,18 @@
+.edu-list { display: flex; flex-direction: column; gap: 28px; }
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.edu-period { width: fit-content; height: fit-content; }
+
+.edu-degree { font-size: 1.1rem; margin-bottom: 6px; }
+.edu-institution { color: var(--text); margin-bottom: 8px; }
+.edu-detail { max-width: 60ch; }
+
+@media (max-width: 640px) {
+  .edu-item { grid-template-columns: 1fr; gap: 10px; }
+}

@@ -1,0 +1,128 @@
+/* ---------------------------------------------------------------------
+   Experience — a vertical timeline: a gradient dot + connecting line per
+   role, each card fading/rising in as the section scrolls into view.
+   The current role gets a highlighted "Present" treatment.
+------------------------------------------------------------------------ */
+
+.exp-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 20px;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.exp-timeline.in-view .exp-item { opacity: 1; transform: translateY(0); }
+
+.exp-dot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exp-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  margin-top: 6px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  flex-shrink: 0;
+}
+
+.exp-line {
+  flex: 1;
+  width: 2px;
+  background: var(--border);
+  margin: 6px 0;
+}
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.exp-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 12px 26px rgba(124, 92, 255, 0.12);
+}
+
+.exp-item.is-current .exp-dot {
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 8px rgba(124, 92, 255, 0.12);
+  animation: exp-current-pulse 2.2s ease-in-out infinite;
+}
+@keyframes exp-current-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.exp-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.exp-card-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.exp-logo {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.exp-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+.exp-logo-fallback {
+  color: #fff;
+  background: var(--accent-gradient);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.exp-card-head h3 { font-size: 1.05rem; }
+
+.exp-period {
+  width: fit-content;
+}
+.exp-item.is-current .exp-period {
+  color: #fff;
+  background: var(--accent-gradient);
+  border-color: transparent;
+}
+
+.exp-company {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.exp-project { color: var(--text-muted); font-weight: 500; }
+
+.exp-detail { max-width: 62ch; }
+
+@media (max-width: 560px) {
+  .exp-item { grid-template-columns: 20px 1fr; gap: 14px; }
+  .exp-card-head { flex-direction: column; align-items: flex-start; }
+}

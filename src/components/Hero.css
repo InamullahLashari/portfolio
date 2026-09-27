@@ -1,0 +1,98 @@
+.hero {
+  padding: calc(var(--nav-height) + 64px) 0 88px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-bottom: 18px;
+}
+
+.hero-tagline {
+  color: var(--text);
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+
+.hero-intro {
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-card {
+  position: relative;
+}
+
+.hero-avatar-ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  padding: 4px;
+  margin-bottom: 16px;
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  animation: hero-ring-spin 6s ease infinite;
+}
+
+@keyframes hero-ring-spin {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-avatar,
+.hero-avatar-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.hero-avatar {
+  background: var(--surface);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-avatar-photo {
+  object-fit: cover;
+  display: block;
+  border: 3px solid var(--surface);
+}
+
+.hero-role-tag { color: var(--text-muted); font-size: 0.9rem; margin: 4px 0 20px; }
+
+.hero-meta { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.hero-meta li { display: flex; justify-content: space-between; gap: 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.hero-meta li span:first-child { color: var(--text-muted); flex-shrink: 0; }
+.hero-meta-value { text-align: right; word-break: break-all; }
+.hero-status { color: var(--success); font-weight: 600; }
+
+.hero-social { display: flex; gap: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.hero-social a { font-size: 0.85rem; color: var(--text-muted); }
+.hero-social a:hover { color: var(--accent); }
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-card { order: -1; max-width: 420px; }
+}

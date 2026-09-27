@@ -1,0 +1,173 @@
+/* ---------------------------------------------------------------------
+   Design tokens
+   A dark, black-to-navy gradient workspace with a warm orange→purple
+   accent gradient used consistently for calls to action, "available"
+   states, and card highlights.
+   Type: Sora for display/headings, Inter for body copy, JetBrains Mono
+   used sparingly for genuinely code-like or tabular content only.
+------------------------------------------------------------------------ */
+:root {
+  --bg: #05060a;
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.075);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f5f6fa;
+  --text-muted: rgba(230, 232, 245, 0.64);
+  --accent: #ff5a36;
+  --accent-soft: rgba(255, 90, 54, 0.16);
+  --accent-border: rgba(255, 90, 54, 0.4);
+  --on-accent: #14182b;
+  /* A second accent used to build gradients across the whole site —
+     skill/about/experience cards, the availability "dashboard", and
+     the welcome gate all share this same orange→purple gradient. */
+  --accent-2: #7c5cff;
+  --accent-gradient: linear-gradient(135deg, #ff9a6c, var(--accent) 55%, var(--accent-2));
+  --success: #35e08a;
+  --success-soft: rgba(53, 224, 138, 0.16);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  --max-width: 1080px;
+  --nav-height: 64px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+
+  /* Fixed black base with two very soft gradient glows, echoing the
+     welcome screen so the whole site reads as one consistent theme. */
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255, 90, 54, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgba(124, 92, 255, 0.1), transparent 45%),
+    linear-gradient(180deg, #05060a 0%, #0b0d14 50%, #05060a 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+p { margin: 0; color: var(--text-muted); }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 88px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-head {
+  margin-bottom: 36px;
+  max-width: 56ch;
+}
+
+.section-head h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  margin-bottom: 10px;
+}
+
+.section-head p {
+  font-size: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn-primary:hover { transform: translateY(-1px); background: #ff6f4d; }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 6px 13px;
+  border-radius: 999px;
+}
+
+/* Used only for genuinely tabular/date-like content (e.g. a date range) —
+   not as a decorative label. */
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+@media (max-width: 640px) {
+  .section { padding: 60px 0; }
+}
